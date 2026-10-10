@@ -1,10 +1,16 @@
 {
   "version": 1,
-  "exhausted": {},
+  "exhausted": {
+    "4c9c754c": "crédits à 0"
+  },
   "keys_usage": {
     "4c9c754c": {
-      "requetes": 2999,
-      "dernier_solde": 14.0
+      "requetes": 3013,
+      "dernier_solde": 0.0
+    },
+    "834f9874": {
+      "requetes": 1706,
+      "dernier_solde": 1294.0
     }
   },
   "runs": []
