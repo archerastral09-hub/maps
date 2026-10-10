@@ -1,9 +1,10 @@
 {
   "version": 1,
   "exhausted": {
-    "4c9c754c": "crédits à 0",
-    "834f9874": "crédits à 0",
-    "cd964552": "crédits à 0"
+    "4c9c754c": "solde nul (preflight)",
+    "834f9874": "solde nul (preflight)",
+    "cd964552": "solde nul (preflight)",
+    "505bd841": "crédits à 0"
   },
   "keys_usage": {
     "4c9c754c": {
@@ -19,8 +20,12 @@
       "dernier_solde": 0.0
     },
     "505bd841": {
-      "requetes": 2922,
-      "dernier_solde": 80.0
+      "requetes": 3002,
+      "dernier_solde": 0.0
+    },
+    "b6180b85": {
+      "requetes": 1607,
+      "dernier_solde": 1393.0
     }
   },
   "runs": [
