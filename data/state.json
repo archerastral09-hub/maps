@@ -2,7 +2,8 @@
   "version": 1,
   "exhausted": {
     "4c9c754c": "crédits à 0",
-    "834f9874": "crédits à 0"
+    "834f9874": "crédits à 0",
+    "cd964552": "crédits à 0"
   },
   "keys_usage": {
     "4c9c754c": {
@@ -14,8 +15,12 @@
       "dernier_solde": 0.0
     },
     "cd964552": {
-      "requetes": 2038,
-      "dernier_solde": 965.0
+      "requetes": 3003,
+      "dernier_solde": 0.0
+    },
+    "505bd841": {
+      "requetes": 740,
+      "dernier_solde": 2260.0
     }
   },
   "runs": []
