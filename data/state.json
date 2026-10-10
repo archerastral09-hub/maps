@@ -19,9 +19,34 @@
       "dernier_solde": 0.0
     },
     "505bd841": {
-      "requetes": 2420,
-      "dernier_solde": 581.0
+      "requetes": 2922,
+      "dernier_solde": 80.0
     }
   },
-  "runs": []
+  "runs": [
+    {
+      "start": "2026-10-10T13:46:19+00:00",
+      "end": "2026-10-10T19:16:20+00:00",
+      "outcome": "durée max",
+      "traitees": 11920,
+      "ok": 11881,
+      "vides": 39,
+      "erreurs": 0,
+      "requetes": 11941,
+      "restantes": 50434,
+      "cles_actives": 18
+    }
+  ],
+  "last_summary": {
+    "start": "2026-10-10T13:46:19+00:00",
+    "end": "2026-10-10T19:16:20+00:00",
+    "outcome": "durée max",
+    "traitees": 11920,
+    "ok": 11881,
+    "vides": 39,
+    "erreurs": 0,
+    "requetes": 11941,
+    "restantes": 50434,
+    "cles_actives": 18
+  }
 }
