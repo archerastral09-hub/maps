@@ -1,0 +1,65 @@
+# À placer dans : .github/workflows/export_immo.yml
+# Le script export_immo.py doit être à la racine du dépôt (à côté de enrich_searlo.py).
+# Lit data/resultats_*.jsonl et produit export/agences_immobilieres.csv
+name: Export agences immobilières
+
+on:
+  workflow_dispatch:
+    inputs:
+      extra_categories:
+        description: "Catégories en plus, séparées par | (ex. Agence de location immobilière|Agence immobilière commerciale)"
+        default: ""
+      commit_export:
+        description: "Enregistrer aussi le CSV dans le dépôt (dossier export/)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: export-immo
+  cancel-in-progress: true
+
+permissions:
+  contents: write   # uniquement utile si commit_export = true
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Générer le CSV
+        env:
+          DATA_DIR: data
+          OUT_FILE: export/agences_immobilieres.csv
+          EXTRA_CATEGORIES: ${{ inputs.extra_categories }}
+        run: python export_immo.py
+
+      - name: Résumé dans le job
+        if: always() && hashFiles('export/export_resume.md') != ''
+        run: cat export/export_resume.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: CSV téléchargeable
+        if: always() && hashFiles('export/agences_immobilieres.csv') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: agences-immobilieres
+          path: export/
+          retention-days: 30
+
+      - name: Enregistrer dans le dépôt (optionnel)
+        if: ${{ inputs.commit_export }}
+        run: |
+          git config user.name  "searlo-bot"
+          git config user.email "searlo-bot@users.noreply.github.com"
+          git add export
+          if git diff --cached --quiet; then echo "Rien à enregistrer"; exit 0; fi
+          git commit -m "export: agences immobilières $(date -u +'%Y-%m-%d %H:%M') UTC"
+          for i in 1 2 3; do
+            git pull --rebase --autostash && git push && break
+            sleep 5
+          done
