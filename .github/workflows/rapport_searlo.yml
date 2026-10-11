@@ -1,0 +1,68 @@
+# À placer dans : .github/workflows/rapport_searlo.yml
+# Le script rapport_searlo.py doit être à la racine du dépôt (à côté de enrich_searlo.py).
+# Lit data/resultats_*.jsonl (+ erreurs.jsonl, state.json, agences_nettoyees.csv) et produit rapport/.
+name: Rapport Searlo
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_rapport:
+        description: "Enregistrer aussi le rapport dans le dépôt (dossier rapport/)"
+        type: boolean
+        default: false
+  # Décommente pour générer un rapport automatiquement à la fin de chaque run d'enrichissement :
+  # workflow_run:
+  #   workflows: ["Enrichissement Searlo"]
+  #   types: [completed]
+
+concurrency:
+  group: rapport-searlo
+  cancel-in-progress: true
+
+permissions:
+  contents: write   # uniquement utile si commit_rapport = true
+
+jobs:
+  rapport:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Générer le rapport
+        env:
+          DATA_DIR: data
+          OUT_DIR: rapport
+          INPUT_FILE: data/agences_nettoyees.csv
+          NAME_STRONG: "0.85"   # nom considéré quasi identique
+          NAME_OK: "0.60"       # nom considéré ressemblant
+        run: python rapport_searlo.py
+
+      - name: Afficher le rapport dans le résumé du job
+        if: always() && hashFiles('rapport/rapport.md') != ''
+        run: cat rapport/rapport.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fichiers du rapport (téléchargeables)
+        if: always() && hashFiles('rapport/rapport.md') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-searlo
+          path: rapport/
+          retention-days: 30
+
+      - name: Enregistrer dans le dépôt (optionnel)
+        if: ${{ inputs.commit_rapport }}
+        run: |
+          git config user.name  "searlo-bot"
+          git config user.email "searlo-bot@users.noreply.github.com"
+          git add rapport
+          if git diff --cached --quiet; then echo "Rien à enregistrer"; exit 0; fi
+          git commit -m "rapport: $(date -u +'%Y-%m-%d %H:%M') UTC"
+          for i in 1 2 3; do
+            git pull --rebase --autostash && git push && break
+            sleep 5
+          done
