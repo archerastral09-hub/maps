@@ -19,7 +19,8 @@
     "c4925843": "solde nul (preflight)",
     "1e52947c": "crédits à 0",
     "3b639999": "crédits à 0",
-    "412e40a1": "crédits à 0"
+    "412e40a1": "crédits à 0",
+    "07f6264d": "crédits à 0"
   },
   "keys_usage": {
     "4c9c754c": {
@@ -99,8 +100,12 @@
       "dernier_solde": 0.0
     },
     "07f6264d": {
-      "requetes": 1643,
-      "dernier_solde": 1357.0
+      "requetes": 3001,
+      "dernier_solde": 0.0
+    },
+    "53b51974": {
+      "requetes": 332,
+      "dernier_solde": 2668.0
     }
   },
   "runs": [
