@@ -7,7 +7,8 @@
     "505bd841": "crédits à 0",
     "b6180b85": "crédits à 0",
     "d46bb03c": "crédits à 0",
-    "4c8b5d0d": "crédits à 0"
+    "4c8b5d0d": "crédits à 0",
+    "f4e7af05": "crédits à 0"
   },
   "keys_usage": {
     "4c9c754c": {
@@ -39,8 +40,12 @@
       "dernier_solde": 0.0
     },
     "f4e7af05": {
-      "requetes": 2900,
-      "dernier_solde": 117.0
+      "requetes": 3017,
+      "dernier_solde": 0.0
+    },
+    "5543795e": {
+      "requetes": 452,
+      "dernier_solde": 2548.0
     }
   },
   "runs": [
@@ -55,18 +60,30 @@
       "requetes": 11941,
       "restantes": 50434,
       "cles_actives": 18
+    },
+    {
+      "start": "2026-10-10T19:16:39+00:00",
+      "end": "2026-10-11T00:46:40+00:00",
+      "outcome": "durée max",
+      "traitees": 12532,
+      "ok": 12491,
+      "vides": 41,
+      "erreurs": 0,
+      "requetes": 12550,
+      "restantes": 37902,
+      "cles_actives": 13
     }
   ],
   "last_summary": {
-    "start": "2026-10-10T13:46:19+00:00",
-    "end": "2026-10-10T19:16:20+00:00",
+    "start": "2026-10-10T19:16:39+00:00",
+    "end": "2026-10-11T00:46:40+00:00",
     "outcome": "durée max",
-    "traitees": 11920,
-    "ok": 11881,
-    "vides": 39,
+    "traitees": 12532,
+    "ok": 12491,
+    "vides": 41,
     "erreurs": 0,
-    "requetes": 11941,
-    "restantes": 50434,
-    "cles_actives": 18
+    "requetes": 12550,
+    "restantes": 37902,
+    "cles_actives": 13
   }
 }
