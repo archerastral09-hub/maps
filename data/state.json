@@ -84,8 +84,8 @@
       "dernier_solde": 0.0
     },
     "1e52947c": {
-      "requetes": 1487,
-      "dernier_solde": 1515.0
+      "requetes": 2064,
+      "dernier_solde": 938.0
     }
   },
   "runs": [
@@ -124,18 +124,30 @@
       "requetes": 12864,
       "restantes": 25052,
       "cles_actives": 9
+    },
+    {
+      "start": "2026-10-11T06:17:35+00:00",
+      "end": "2026-10-11T11:47:37+00:00",
+      "outcome": "durée max",
+      "traitees": 12760,
+      "ok": 12709,
+      "vides": 51,
+      "erreurs": 0,
+      "requetes": 12771,
+      "restantes": 12292,
+      "cles_actives": 5
     }
   ],
   "last_summary": {
-    "start": "2026-10-11T00:47:02+00:00",
-    "end": "2026-10-11T06:17:03+00:00",
+    "start": "2026-10-11T06:17:35+00:00",
+    "end": "2026-10-11T11:47:37+00:00",
     "outcome": "durée max",
-    "traitees": 12850,
-    "ok": 12798,
-    "vides": 52,
+    "traitees": 12760,
+    "ok": 12709,
+    "vides": 51,
     "erreurs": 0,
-    "requetes": 12864,
-    "restantes": 25052,
-    "cles_actives": 9
+    "requetes": 12771,
+    "restantes": 12292,
+    "cles_actives": 5
   }
 }
