@@ -1,0 +1,54 @@
+name: Scrape équipes Laforêt
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Nombre d'agences à traiter (0 = toutes, utile pour tester)"
+        required: false
+        default: "0"
+      delay:
+        description: "Pause entre deux agences (secondes)"
+        required: false
+        default: "1.0"
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer les dépendances
+        run: pip install requests beautifulsoup4 openpyxl
+
+      - name: Récupérer les équipes
+        env:
+          INPUT_FILE: agences_laforet.xlsx
+          LIMIT: ${{ github.event.inputs.limit }}
+          DELAY: ${{ github.event.inputs.delay }}
+        run: python scrape_laforet_equipes.py
+
+      - name: Publier les résultats
+        uses: actions/upload-artifact@v4
+        with:
+          name: laforet-equipes
+          path: |
+            agences_laforet.xlsx
+            erreurs_laforet_equipes.csv
+
+      - name: Commit du fichier mis à jour
+        if: ${{ github.event.inputs.limit == '0' || github.event.inputs.limit == '' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add agences_laforet.xlsx erreurs_laforet_equipes.csv
+          git diff --cached --quiet || git commit -m "Équipes Laforêt mises à jour"
+          git push
